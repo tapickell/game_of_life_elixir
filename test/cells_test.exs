@@ -4,6 +4,25 @@ defmodule GameOfLife.CellsTest do
   alias GameOfLife.Cells
   alias GameOfLife.Patterns.{Oscillators, StillLifes}
 
+  describe "next_state/1" do
+    test "given a set of cells the returned set contains expected cells" do
+      pop_cells = Oscillators.blinker({0, 0}, :x)
+      expected_pop_cells = Oscillators.blinker({0, 0}, :y)
+
+      assert expected_pop_cells == Cells.next_state(pop_cells)
+    end
+  end
+
+  describe "apply_changes/2" do
+    test "given a set of cells and a subset to pop and unpop the returned set contains expected cells" do
+      pop_cells = Oscillators.blinker({0, 0}, :x)
+      {pop, unpop} = Cells.changes_for_cells(pop_cells)
+      expected_pop_cells = Oscillators.blinker({0, 0}, :y)
+
+      assert expected_pop_cells == Cells.apply_changes({pop, unpop}, pop_cells)
+    end
+  end
+
   describe "changes_for_cells/2 with oscillators" do
     test "given a blinker on the x axis it should return updates to create a blinker on the y" do
       # - - - - -       - - - - -
