@@ -19,13 +19,14 @@ defmodule GameOfLife.GameTest do
       pop_cells = Oscillators.blinker({0, 0}, :x)
       expected_pop_cells = Oscillators.blinker({0, 0}, :y)
 
-      gen_2 =
-        Game.new(pop_cells)
-        |> Game.next_state()
+      gen_1 = Game.new(pop_cells)
+      gen_2 = Game.next_state(gen_1)
 
-      assert gen_2.generation == 2
+      assert gen_2.id == gen_1.id
+      assert gen_2.generation == gen_1.generation + 1
       assert gen_2.pop_cells == expected_pop_cells
       assert gen_2.population == 3
+      refute gen_2.timestamp == gen_1.timestamp
     end
   end
 end

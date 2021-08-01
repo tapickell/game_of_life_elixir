@@ -1,6 +1,8 @@
 defmodule GameOfLife.Game do
   alias GameOfLife.Cells
 
+  # TODO could use a defstruct here for %Game{}
+
   def new(initial_population \\ MapSet.new()) do
     %{
       generation: 1,
