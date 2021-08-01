@@ -1,5 +1,5 @@
 defmodule GameOfLife.Cell do
-  #   returns a tuple of lists of populated and de-poplulated coordinates
+  #   returns a tuple of MapSets of populated and de-poplulated coordinates
   #   changes_for_cell({x,y}, %MapSet{[{x,y}..{xn,yn}]}) :: {%MapSet{[{x,y}..{xn,yn}]}, %MapSet{[{x,y}..{xn,yn}]}
   def changes_for_cell(cell, :pop, pop_cells) do
     pop = unpop = MapSet.new()
