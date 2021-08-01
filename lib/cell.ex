@@ -9,9 +9,12 @@ defmodule GameOfLife.Cell do
       |> get_nbrs()
       |> split_nbrs(pop_cells)
 
-    if :unpop == state_change(:pop, MapSet.size(pop_nbrs)) do
-      MapSet.put(unpop, cell)
-    end
+    unpop =
+      if :unpop == state_change(:pop, MapSet.size(pop_nbrs)) do
+        MapSet.put(unpop, cell)
+      else
+        unpop
+      end
 
     {pop, unpop}
   end
@@ -24,9 +27,12 @@ defmodule GameOfLife.Cell do
       |> get_nbrs()
       |> split_nbrs(pop_cells)
 
-    if :pop == state_change(:unpop, MapSet.size(pop_nbrs)) do
-      MapSet.put(pop, cell)
-    end
+    pop =
+      if :pop == state_change(:unpop, MapSet.size(pop_nbrs)) do
+        MapSet.put(pop, cell)
+      else
+        pop
+      end
 
     {pop, unpop}
   end
